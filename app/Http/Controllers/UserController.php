@@ -74,8 +74,7 @@ class UserController extends Controller
             $user->role_id = $role->id;
         }
 
-        $user->fill($request->except(['role']));
-        $user->save();
+        $user->update($request->except(['role']));
 
         return response()->json([
             'message' => 'تم تعديل معلومات المستخدم بنجاح',
@@ -100,7 +99,7 @@ class UserController extends Controller
     public function showAccounts(Request $request)
     {
         $users = User::with('role')->get();
-        
+
         return response()->json([
             'message' => 'Users retrieved successfully.',
             'users' => $users,
