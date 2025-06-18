@@ -78,4 +78,35 @@ class ProductController extends Controller
             'Product' => $product
         ]);
     }
+
+    public function products_search(Request $request){
+        $search = $request->input('query');
+
+        if ($search) {
+            $products = Product::where('name', 'LIKE', "%{$search}%")
+                               ->get();
+        } else {
+            $products = Product::all();
+        }
+
+        return response()->json($products);
+    }
+
+    public function product_frees_or_unfrees(Product $product){
+        if($product->is_active){
+            $product->is_active = false;
+            $product->save();
+            return response()->json([
+                'message' => 'تم تجميد هذا المنتج',
+                'Product' => $product
+            ]);
+        } else {
+            $product->is_active = true;
+            $product->save();
+            return response()->json([
+                'message' => 'تم الغاء تجميد هذا المنتج',
+                'Product' => $product
+            ]);
+        }
+    }
 }

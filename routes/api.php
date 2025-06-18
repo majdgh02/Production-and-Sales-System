@@ -28,4 +28,6 @@ Route::middleware('auth:sanctum', 'role:admin')->prefix('admin')->group(function
     Route::post('/create-product', [ProductController::class, 'create_product']);
     Route::post('/edit-product/{product}', [ProductController::class, 'edit_product']);
     Route::get('/get-product/{product}', [ProductController::class, 'get_product']);
+    Route::get('/products/search', [ProductController::class, 'products_search']); //search for the admin (include the off products)
+    Route::post('/product/frees-or-unfrees/{product}', [ProductController::class, 'product_frees_or_unfrees']);
 });
