@@ -46,7 +46,7 @@ class UserController extends Controller
         ]);
 
         return response()->json([
-            'message' => 'تم انشاء المستخدم بنجاح',
+            'message' => 'User created successfully',
             'user' => $user
         ],200);
     }
@@ -77,7 +77,7 @@ class UserController extends Controller
         $user->update($request->except(['role']));
 
         return response()->json([
-            'message' => 'تم تعديل معلومات المستخدم بنجاح',
+            'message' => 'User information has been modified successfully.',
             'user' => $user
         ],200);
     }
@@ -90,9 +90,8 @@ class UserController extends Controller
 
         $user->delete();
 
-
         return response()->json([
-            'message' => 'تم حذف الحساب.'
+            'message' => 'The account has been successfully deleted.'
         ], 200);
     }
 

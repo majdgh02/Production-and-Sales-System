@@ -25,7 +25,7 @@ class AuthController extends Controller
         // Check password
         if (!$user || !Hash::check($fields['password'], $user->password)) {
             return response()->json([
-                'message' => 'اسم المستخدم او كلمة المرور غير صحيحة'
+                'message' => 'Incorrect username or password'
             ], 401); // 401 Unauthorized
         }
 
@@ -39,11 +39,10 @@ class AuthController extends Controller
 
     public function logout(Request $request)
     {
-        // حذف التوكن الحالي الذي يستخدمه المستخدم للمصادقة
         $request->user()->currentAccessToken()->delete();
 
         return response()->json([
-            'message' => 'تم تسحيل الخروج بنجاح'
+            'message' => 'You have successfully logged out.'
         ], 200);
     }
 
@@ -57,7 +56,7 @@ class AuthController extends Controller
         $user = $request->user();
         if(!Hash::check($request->old_password, $user->password)) {
             return response()->json([
-                'message' => 'كلمة المرور الحالية غير صحيحة'
+                'message' => 'The current password is incorrect.'
             ], 401);
         }
 
@@ -66,7 +65,7 @@ class AuthController extends Controller
         $user->tokens()->delete();
 
         return response()->json([
-            'message' => 'تم تغيير كلمة المرور بنجاح, يرجى اعادة تسجيل الدخول'
+            'message' => 'Your password has been changed successfully, please log in again.'
         ], 200);
     }
 }

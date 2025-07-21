@@ -44,4 +44,9 @@ class Product extends Model
     {
         return $this->quantity > 0;
     }
+
+    public function productions()
+    {
+        return $this->hasMany(Production::class);
+    }
 }

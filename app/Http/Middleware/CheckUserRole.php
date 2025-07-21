@@ -19,7 +19,7 @@ class CheckUserRole
         $userRole = $request->user()->role;
         if(!in_array($userRole->name, $role)){
             return response()->json([
-                'message' => 'غير مُصرَّح لك. ليس لديك الدور اللازم.'
+                'message' => 'You are not authorized, you do not have the required role.'
             ], 403);
         }
 
